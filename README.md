@@ -13,6 +13,8 @@ Container Path: /guide2go <> /mnt/user/appdata/guide2go/ \
 Container Path: /TVH <> /mnt/user/appdata/tvheadend/data/ << not needed if no TVHeadend is used \
 while /mnt/user/appdata/ should fit to your system path ...
 
+- docker run -d --name='guide2go' --net='bridge' --log-opt max-size='10m' --log-opt max-file='3' -e TZ="Europe/Berlin" -e HOST_OS="Unraid" -v '/mnt/user/appdata/guide2go/_config':'/config':'rw' -v '/mnt/user/appdata/guide2go/':'/guide2go':'rw' 'alturismo/guide2go'
+
 setup guide2go SD subscrition as follows or copy your existing .json files into your mounted /guide2go folder \
 docker exec -it "dockername" guide2go -configure /guide2go/"your_epg_name".json
 
