@@ -9,12 +9,12 @@ use_plexAPI="no"
 use_TVH_Play="no"
 use_TVH_move="no"
 
-### List of created lineup json files in /guide2go
-# sample with 3 jsons lineups
-JsonList="CBLguide.json SATguide.json SATSport.json"
+### List of created lineup yaml files in /guide2go
+# sample with 3 yaml lineups
+JsonList="CBLguide.yaml SATguide.yaml SATSport.yaml"
 
 ### to create your lineups do as follows and follow the instructions
-# docker exec -it <yourdockername> guide2go -configure /guide2go/<lineupnamehere>.json
+# docker exec -it <yourdockername> guide2go -configure /guide2go/<lineupnamehere>.yaml
 
 ### xTeve ip, Port in case API is used to update XEPG
 xTeveIP="192.168.1.2"
@@ -56,14 +56,15 @@ TVHPATH="/TVH"
 #
 
 # run guide2go in loop
+
 if [ "$use_guide2go" = "yes" ]; then
 	for jsons in $JsonList
 		do
 		jsonefile="${jsons%.*}"
-		filecache='  "file.cache": "/guide2go/cache_'$jsons'",'
-		fileoutput='  "file.output": "/guide2go/'$jsonefile'.xml",'
-		sed -i "/file.cache/c $filecache" /guide2go/$jsons
-		sed -i "/file.output/c $fileoutput" /guide2go/$jsons
+		filecache='Cache: /guide2go/'$jsonefile'_cache.json'
+		fileoutput='XMLTV: /guide2go/'$jsonefile'.xml'
+		sed -i "/Cache/c \    $filecache" /guide2go/$jsons
+		sed -i "/XMLTV/c \    $fileoutput" /guide2go/$jsons
 		guide2go -config /guide2go/$jsons
 	done
 fi
