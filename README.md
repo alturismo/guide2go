@@ -31,7 +31,7 @@ docker exec -it "dockername" guide2go -configure /guide2go/"your_epg_name".yaml
 to test the cronjob functions \
 docker exec -it "dockername" ./config/cronjob.sh
 
-included functions are (all can be individual turned on / off)
+included functions are (all can be individual turned on / off) 
 
 guide2go - xmltv epg grabber for schedules direct, thanks to @marmei \
 github: https://github.com/mar-mei/guide2go \
